@@ -18,7 +18,7 @@ public class EmpPayrollDTO {
         this.name = name;
     }
 
-    public double getSalary() {
+    public long getSalary() {
         return salary;
     }
 
