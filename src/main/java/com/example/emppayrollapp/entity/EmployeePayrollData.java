@@ -30,7 +30,7 @@ public @Data class EmployeePayrollData {
     @Column(name = "department")
     private List<String> department;
 
-    public EmployeePayrollData () { }
+    public EmployeePayrollData(EmpPayrollDTO employeePayrollDTO) { }
 
 
     public EmployeePayrollData(int Id,EmpPayrollDTO employeePayrollDTO) {
