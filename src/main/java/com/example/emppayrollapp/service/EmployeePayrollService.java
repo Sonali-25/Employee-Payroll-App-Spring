@@ -18,7 +18,7 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 
     @Autowired
     private EmployeePayrollRepository employeePayrollRepository;
-    
+
     public List<EmployeePayrollData> getEmployeePayroll() {
         return employeePayrollRepository.findAll();
     }
@@ -29,10 +29,12 @@ public class EmployeePayrollService implements IEmployeePayrollService{
                         employeeId + "DoesNot Exists...!!"));
     }
 
+    public List<EmployeePayrollData> getEmployeeByDepartment(String department) {
+        return employeePayrollRepository.findEmployeeByDepartment(department);
+    }
+
     public EmployeePayrollData createEmployeePayrollData(EmpPayrollDTO employeePayrollDTO) {
-        EmployeePayrollData empData = null;
-        empData = new EmployeePayrollData(employeePayrollDTO);
-        log.debug("Emp Data: "+empData.toString());
+        EmployeePayrollData empData = new EmployeePayrollData(employeePayrollDTO);
         return employeePayrollRepository.save(empData);
     }
 

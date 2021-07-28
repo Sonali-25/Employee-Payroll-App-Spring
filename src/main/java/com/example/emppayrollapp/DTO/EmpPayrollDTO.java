@@ -10,7 +10,7 @@ import java.util.List;
 public  @ToString class EmpPayrollDTO {
 
 
-    @Pattern(regexp = "^[A-Z] {1} [a-zA-z\\s] {2,}$",
+    @Pattern(regexp = "^[A-Z] [a-zA-z\\s] {2,}$",
             message = "Employee name Invalid")
     public String name;
 
@@ -18,10 +18,11 @@ public  @ToString class EmpPayrollDTO {
             message = "Min wage should be more than 500")
     public long salary;
 
-    @Pattern(regexp = "male|female", message = "Gender needs to be male or female")
+    @Pattern(regexp = "Male|Female",
+            message = "Gender needs to be male or female")
     public String gender;
 
-    @JsonFormat(pattern = "dd MM yyyy")
+    @JsonFormat(pattern = "dd mm yyyy")
     @NotNull (message = "Start Date Should Not Be Empty")
     @PastOrPresent (message = "StartDate Should Be Past Or Today's Date")
     public LocalDate startDate;
@@ -72,17 +73,17 @@ public  @ToString class EmpPayrollDTO {
     public List<String> getDepartment() {
         return department;
     }
-
-    @Override
-    public String toString() {
-        return "EmployeePayrollDto{" +
-                "name='" + name + '\'' +
-                ", salary=" + salary + '\'' +
-                ", gender=" + gender + '\'' +
-                ", startDate=" + startDate + '\'' +
-                ", note=" + note + '\'' +
-                ", profilePic=" + profilePic + '\'' +
-                ", department=" + department + '\'' +
-                '}';
-    }
+//
+//    @Override
+//    public String toString() {
+//        return "EmployeePayrollDto{" +
+//                "name='" + name + '\'' +
+//                ", salary=" + salary + '\'' +
+//                ", gender=" + gender + '\'' +
+//                ", startDate=" + startDate + '\'' +
+//                ", note=" + note + '\'' +
+//                ", profilePic=" + profilePic + '\'' +
+//                ", department=" + department + '\'' +
+//                '}';
+//    }
 }

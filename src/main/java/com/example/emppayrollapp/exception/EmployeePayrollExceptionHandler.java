@@ -16,16 +16,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
-@Slf4j
 public class EmployeePayrollExceptionHandler {
 
-    private static final String message = "Exception while processing REST Request";
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ResponseDTO> handleHttpMessageNotReadableException(
+    public ResponseEntity<ResponseDTO> handleDateException(
                                         HttpMessageNotReadableException exception){
-        log.error("Invalid Date Format", exception);
-        ResponseDTO responseDTO = new ResponseDTO(message,
-                "Should Have Date In The Format dd MM yyyy");
+        ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST Request",
+                "Should Have Date In The Format dd mm yyyy");
         return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(EmployeePayrollException.class)
@@ -37,9 +34,9 @@ public class EmployeePayrollExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException
             (MethodArgumentNotValidException exception){
-        List<ObjectError> allErrors = exception.getBindingResult().getAllErrors();
-        List<String> errorMessages = allErrors.stream()
-                .map(objectError -> objectError.getDefaultMessage())
+        List<ObjectError> errorList = exception.getBindingResult().getAllErrors();
+        List<String> errorMessages = errorList.stream()
+                .map(DefaultMessageSourceResolvable ::getDefaultMessage)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(new ResponseDTO("Validation Error",errorMessages),
                 HttpStatus.BAD_REQUEST);

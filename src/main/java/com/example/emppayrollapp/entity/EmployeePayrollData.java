@@ -17,27 +17,26 @@ public @Data class EmployeePayrollData {
     @Column(name = "employee_id")
     private int employeeId;
 
-    @Column(name = "name")
     private String name;
     private long salary;
     private String gender;
+    @Column(name = "start_date")
     private LocalDate startDate;
     private String note;
+    @Column(name = "profile_pic")
     private String profilePic;
 
     @ElementCollection
     @CollectionTable(name = "employee_department", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "department")
-    private List<String> department;
+    private List<String> departments;
 
-    public EmployeePayrollData(EmpPayrollDTO employeePayrollDTO) { }
+    public EmployeePayrollData() {
 
-
-    public EmployeePayrollData(int Id,EmpPayrollDTO employeePayrollDTO) {
+    }
+    public EmployeePayrollData(EmpPayrollDTO employeePayrollDTO) {
         this.updateEmployeePayrollData(employeePayrollDTO);
     }
-
-
 
     public void updateEmployeePayrollData(EmpPayrollDTO employeePayrollDTO){
         this.name = employeePayrollDTO.getName();
@@ -46,18 +45,7 @@ public @Data class EmployeePayrollData {
         this.startDate = employeePayrollDTO.getStartDate();
         this.note = employeePayrollDTO.getNote();
         this.profilePic = employeePayrollDTO.getProfilePic();
-        this.department = employeePayrollDTO.getDepartment();
+        this.departments = employeePayrollDTO.getDepartment();
     }
 
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSalary(long salary) {
-        this.salary = salary;
-    }
 }
